@@ -50,8 +50,6 @@ class GoMedici:
             self.companyLinks += pageLinks
             print('Fetched Page Number:', self.page)
             self.page += 1
-            if self.page > 1:
-                break
             if len(pageLinks) == 0:
                 break
 
