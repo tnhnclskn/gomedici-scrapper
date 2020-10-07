@@ -5,4 +5,4 @@ RUN mkdir export
 ADD . .
 RUN pip install -r requirements.txt
 
-CMD python scrapper.py
+CMD python -u scrapper.py
