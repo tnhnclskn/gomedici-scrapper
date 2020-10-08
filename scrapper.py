@@ -49,15 +49,21 @@ class GoMedici:
             pageLinks = self.parseCompanyLinks(pageContent)
             self.companyLinks += pageLinks
             print('Fetched Page Number:', self.page)
+            self.fetchCompaniesData()
+            self.exportXls()
             self.page += 1
             if len(pageLinks) == 0:
                 break
 
     def fetchCompaniesData(self):
-        for companyLink in self.companyLinks:
-            company = self.fetchCompanyData(companyLink)
-            print('Fetched Company:', company['COMPANY_NAME'])
-            self.companies.append(company)
+        while len(self.companyLinks) > 0:
+            companyLink = self.companyLinks.pop()
+            try:
+                company = self.fetchCompanyData(companyLink)
+                print('Fetched Company:', company['COMPANY_NAME'])
+                self.companies.append(company)
+            except:
+                print('Failed URL:', companyLink)
 
     def fetchCompanyData(self, companyLink):
         url = 'https://gomedici.com' + companyLink
@@ -163,5 +169,3 @@ class GoMedici:
 
 gomedici = GoMedici('190d276b106cf3269e5b8915f92ac40e')
 gomedici.fetchCompanyLinks()
-gomedici.fetchCompaniesData()
-gomedici.exportXls()
