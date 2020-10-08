@@ -153,7 +153,10 @@ class GoMedici:
             values = []
             for value in company.values():
                 if type(value) is list:
-                    value = ';'.join(value)
+                    if len(value) > 0:
+                        value = ';'.join(value)
+                    else:
+                        value = ''
                 values.append(value)
             data.append(values)
 
